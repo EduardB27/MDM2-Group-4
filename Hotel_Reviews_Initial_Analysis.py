@@ -108,7 +108,7 @@ df2['Negative_Review'] = df2['Negative_Review'].str.replace('\w*\d\w*', '')
 df3['Negative_Review'] = df3['Negative_Review'].str.replace('\w*\d\w*', '')
 df4['Negative_Review'] = df4['Negative_Review'].str.replace('\w*\d\w*', '')
 
-df1.to_excel('Tier_2_Negative.xlsx',index=False)
+df1.to_excel('Tier_1_Negative.xlsx',index=False)
 df2.to_excel('Tier_2_Negative.xlsx',index=False)
 df3.to_excel('Tier_3_Negative.xlsx',index=False)
 df4.to_excel('Tier_4_Negative.xlsx',index=False)
