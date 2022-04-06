@@ -139,3 +139,27 @@ data_cv4= cv.fit_transform(df4['Negative_Review'])
 data_dtm4 = pd.DataFrame(data_cv4.toarray(), columns=cv.get_feature_names())
 data_dtm4.index = df4.index
 data_dtm4.to_excel('new_data4.xlsx')
+#ATTEMPTED TO USE LOOP FOR FREQUENCY ANALYSIS BUT FAILED 
+#N = 35
+#for i in [data_dtm1,data_dtm2,data_dtm3,data_dtm4]:
+#    print(i.sum().nlargest(N).rename_axis('word').reset_index(name='count'))
+    
+
+#FREQUENCY ANALYSIS WITHOUT LOOP
+#TOP 35 WORDS FOR EACH TIER/ NOT INDIVIDUAL HOTEL
+N=35
+top_dict1 = {}
+top_1= data_dtm1.sum().nlargest(N).rename_axis('word').reset_index(name='count')
+top_dict1 = list(zip(top_1.index, top_1.values))
+
+top_dict2 = {}
+top_2= data_dtm1.sum().nlargest(N).rename_axis('word').reset_index(name='count')
+top_dict2 = list(zip(top_2.index, top_2.values))
+
+top_dict3 = {}
+top_3= data_dtm3.sum().nlargest(N).rename_axis('word').reset_index(name='count')
+top_dict3 = list(zip(top_3.index, top_3.values))
+
+top_dict4 = {}
+top_4= data_dtm4.sum().nlargest(N).rename_axis('word').reset_index(name='count')
+top_dict4 = list(zip(top_4.index, top_4.values))
