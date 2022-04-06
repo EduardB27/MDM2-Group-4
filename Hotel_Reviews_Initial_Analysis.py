@@ -70,7 +70,7 @@ df3 = df3.drop_duplicates(subset=['Hotel_Name', 'Negative_Review'])
 tier2_hotel = df.loc[df['Hotel_Name'].isin(['The Principal London', 'The Park Tower Knightsbridge a Luxury Collection Hotel','Park Plaza County Hall London','Novotel London Tower Bridge',' Park Grand London Lancaster Gate']),['Hotel_Name', 'Negative_Review']]
 tier2_hotel.to_excel('Tier2_Hotels.xlsx',index=False)
 excel_file_path_2 = 'Tier2_Hotels.xlsx'
-df2 = pd.read_excel(excel_file_path_3)
+df2 = pd.read_excel(excel_file_path_2)
 df2['Negative_Review'] = df2.groupby(['Hotel_Name'])['Negative_Review'].transform(lambda x : ' '.join(x))
 df2 = df2.drop_duplicates(subset=['Hotel_Name', 'Negative_Review']) 
 #df2.to_excel('Tier_2_Negative.xlsx')
