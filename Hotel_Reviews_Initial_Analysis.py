@@ -195,6 +195,7 @@ wc1 = WordCloud(stopwords=stop_words, background_color="white", colormap="Dark2"
 plt.rcParams['figure.figsize'] = [16, 6]
 plt.imshow(wc1, interpolation="bilinear")
 plt.axis("off")
+plt.title('Top words Tier 1')
 plt.show()
 
 
