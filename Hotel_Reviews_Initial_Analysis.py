@@ -163,3 +163,39 @@ top_dict3 = top_3.set_index('word').to_dict()['count']
 top_dict4 = {}
 top_4= data_dtm4.sum().nlargest(N).rename_axis('word').reset_index(name='count')
 top_dict4 = top_4.set_index('word').to_dict()['count']
+
+#CREATING WORDCLOUDS
+
+wc1 = WordCloud(stopwords=stop_words, background_color="white", colormap="Dark2",
+               max_font_size=150, random_state=42, width=800, height=400, max_words=200).generate_from_frequencies(top_dict1)
+plt.rcParams['figure.figsize'] = [16, 6]
+plt.imshow(wc1, interpolation="bilinear")
+plt.axis("off")
+plt.show()
+
+
+wc2 = WordCloud(stopwords=stop_words, background_color="white", colormap="Dark2",
+               max_font_size=150, random_state=42, width=800, height=400, max_words=200).generate_from_frequencies(top_dict2)
+plt.rcParams['figure.figsize'] = [16, 6]
+plt.imshow(wc2, interpolation="bilinear")
+plt.axis("off")
+plt.title('Top words Tier 2')    
+plt.show()
+
+
+wc3 = WordCloud(stopwords=stop_words, background_color="white", colormap="Dark2",
+               max_font_size=150, random_state=42, width=800, height=400, max_words=200).generate_from_frequencies(top_dict3)
+plt.rcParams['figure.figsize'] = [16, 6]
+plt.imshow(wc3, interpolation="bilinear")
+plt.axis("off")
+plt.title('Top words Tier 3')
+plt.show()
+
+
+wc4 = WordCloud(stopwords=stop_words, background_color="white", colormap="Dark2",
+               max_font_size=150, random_state=42, width=800, height=400, max_words=200).generate_from_frequencies(top_dict4)
+plt.rcParams['figure.figsize'] = [16, 6]
+plt.imshow(wc4, interpolation="bilinear")
+plt.axis("off")
+plt.title('Top words Tier 4')    
+plt.show()
