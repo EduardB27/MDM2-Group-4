@@ -115,6 +115,18 @@ df4.to_excel('Tier_4_Negative.xlsx',index=False)
 
 #CREATE CORPUS
 #embed() 
+#CREATE STOP WORDS 
+
+stop_words = nltk.corpus.stopwords.words('english')
+new_words=("bit","didn","like","good","did","just","wasn",
+                  "did","could","would","also","get","us",
+                  "even","really","one","everything","nothing",
+                  "needs","work","next","quite","think","asked","got","need")
+for i in new_words:
+    stop_words.append(i)
+    
+    
+    
 cv = CountVectorizer(stop_words='english')
 data_cv1= cv.fit_transform(df1['Negative_Review'])
 data_dtm1 = pd.DataFrame(data_cv1.toarray(), columns=cv.get_feature_names())
