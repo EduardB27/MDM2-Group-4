@@ -7,8 +7,12 @@ Created on Mon Mar 21 21:31:49 2022
 
 import pandas as pd
 import nltk
+#import seaborn as sns
+#import pickle
+#import re
+#import string
 from sklearn.feature_extraction.text import CountVectorizer
-from IPython import embed 
+#from IPython import embed 
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
@@ -115,7 +119,9 @@ df4.to_excel('Tier_4_Negative.xlsx',index=False)
 
 #CREATE CORPUS
 #embed() 
-#CREATE STOP WORDS 
+
+
+
 
 stop_words = nltk.corpus.stopwords.words('english')
 new_words=("bit","didn","like","good","did","just","wasn",
@@ -124,48 +130,47 @@ new_words=("bit","didn","like","good","did","just","wasn",
                   "needs","work","next","quite","think","asked","got","need")
 for i in new_words:
     stop_words.append(i)
-    
-    
-    
-cv = CountVectorizer(stop_words='english')
+
+cv = CountVectorizer(stop_words=stop_words)
 data_cv1= cv.fit_transform(df1['Negative_Review'])
-data_dtm1 = pd.DataFrame(data_cv1.toarray(), columns=cv.get_feature_names())
+data_dtm1 = pd.DataFrame(data_cv1.toarray(), columns=cv.get_feature_names_out())
 data_dtm1.index = df1.index
 data_dtm1.to_excel('new_data1.xlsx')
 
-cv = CountVectorizer(stop_words='english')
+cv = CountVectorizer(stop_words=stop_words)
 data_cv2= cv.fit_transform(df2['Negative_Review'])
-data_dtm2 = pd.DataFrame(data_cv2.toarray(), columns=cv.get_feature_names())
+data_dtm2 = pd.DataFrame(data_cv2.toarray(), columns=cv.get_feature_names_out())
 data_dtm2.index = df2.index
 data_dtm2.to_excel('new_data2.xlsx')
 
-cv = CountVectorizer(stop_words='english')
+cv = CountVectorizer(stop_words=stop_words)
 data_cv3= cv.fit_transform(df3['Negative_Review'])
-data_dtm3 = pd.DataFrame(data_cv3.toarray(), columns=cv.get_feature_names())
+data_dtm3 = pd.DataFrame(data_cv3.toarray(), columns=cv.get_feature_names_out())
 data_dtm3.index = df3.index
 data_dtm3.to_excel('new_data3.xlsx')
 
-cv = CountVectorizer(stop_words='english')
+cv = CountVectorizer(stop_words=stop_words)
 data_cv4= cv.fit_transform(df4['Negative_Review'])
-data_dtm4 = pd.DataFrame(data_cv4.toarray(), columns=cv.get_feature_names())
+data_dtm4 = pd.DataFrame(data_cv4.toarray(), columns=cv.get_feature_names_out())
 data_dtm4.index = df4.index
 data_dtm4.to_excel('new_data4.xlsx')
+
+
 #ATTEMPTED TO USE LOOP FOR FREQUENCY ANALYSIS BUT FAILED 
-#N = 40
+#N = 35
 #for i in [data_dtm1,data_dtm2,data_dtm3,data_dtm4]:
 #    print(i.sum().nlargest(N).rename_axis('word').reset_index(name='count'))
     
 
 #FREQUENCY ANALYSIS WITHOUT LOOP
-#TOP 40 WORDS FOR EACH TIER/ NOT INDIVIDUAL HOTEL
-#IT GOES THROUGH EACH COLUMN OF THE CORPUS AND IT ADDS UP ALL THE INSTANCES OF EACH WORD, THEN PUTS THE TOP 40 IN A DICTIONARY 
+#TOP 35 WORDS FOR EACH TIER/ NOT INDIVIDUAL HOTEL
 N=40
 top_dict1 = {}
 top_1= data_dtm1.sum().nlargest(N).rename_axis('word').reset_index(name='count')
 top_dict1 = top_1.set_index('word').to_dict()['count']
 
 top_dict2 = {}
-top_2= data_dtm1.sum().nlargest(N).rename_axis('word').reset_index(name='count')
+top_2= data_dtm2.sum().nlargest(N).rename_axis('word').reset_index(name='count')
 top_dict2 = top_2.set_index('word').to_dict()['count']
 
 top_dict3 = {}
@@ -176,7 +181,14 @@ top_dict4 = {}
 top_4= data_dtm4.sum().nlargest(N).rename_axis('word').reset_index(name='count')
 top_dict4 = top_4.set_index('word').to_dict()['count']
 
-#CREATING WORDCLOUDS
+#print(top_dict1)
+#print(top_dict2)
+#print(top_dict3)
+#print(top_dict4)
+
+#N = 30
+#for i in [data_dtm1,data_dtm2,data_dtm3,data_dtm4]:
+#    print(i.sum().nlargest(N).rename_axis('word').reset_index(name='count'))
 
 wc1 = WordCloud(stopwords=stop_words, background_color="white", colormap="Dark2",
                max_font_size=150, random_state=42, width=800, height=400, max_words=200).generate_from_frequencies(top_dict1)
@@ -211,3 +223,9 @@ plt.imshow(wc4, interpolation="bilinear")
 plt.axis("off")
 plt.title('Top words Tier 4')    
 plt.show()
+
+
+
+
+
+
