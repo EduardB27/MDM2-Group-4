@@ -6,12 +6,11 @@ Created on Mon Mar 21 21:31:49 2022
 """
 
 import pandas as pd
-import seaborn as sns
-import pickle
-import re
-import string
+import nltk
 from sklearn.feature_extraction.text import CountVectorizer
 from IPython import embed 
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
 
 #we firstly have to create a file path to access our spreadsheet
 excel_file_path = 'Hotel_Reviews.csv'
